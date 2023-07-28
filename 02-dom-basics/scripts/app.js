@@ -15,6 +15,25 @@ window.onload = function () {
     listContainer.append(liElement);
     input.value = "";
   });
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      const users = await response.json();
+      users.forEach((user) => {
+        const liElement = document.createElement("li");
+        liElement.classList.add("list-group-item", "mb-2");
+        liElement.innerHTML = user.name;
+        listContainer.append(liElement);
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchUsers();
 };
 
 // function e() {

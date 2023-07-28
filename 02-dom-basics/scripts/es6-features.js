@@ -315,20 +315,43 @@
 // Promise.all(promiseArray).then(console.log).catch(console.error);
 // Promise.allSettled(promiseArray).then(console.log).catch(console.error);
 
-function createPromise(ms, data) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(data);
-    }, ms);
-  });
-}
+// function createPromise(ms, data) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve(data);
+//     }, ms);
+//   });
+// }
 
-let promiseOne = createPromise(1000, "First Promise");
-let promiseTwo = createPromise(1500, "Second Promise");
-let promiseThree = createPromise(2000, "Third Promise");
-let promiseFour = Promise.reject(new Error("Bad Promise"));
+// let promiseOne = createPromise(1000, "First Promise");
+// let promiseTwo = createPromise(1500, "Second Promise");
+// let promiseThree = createPromise(2000, "Third Promise");
+// let promiseFour = Promise.reject(new Error("Bad Promise"));
 
-let promiseArray = [promiseOne, promiseTwo, promiseThree, promiseFour];
+// let promiseArray = [promiseOne, promiseTwo, promiseThree, promiseFour];
 
-Promise.race(promiseArray).then(console.log).catch(console.error);
+// Promise.race(promiseArray).then(console.log).catch(console.error);
 // Promise.any(promiseArray).then(console.log).catch(console.error);
+
+// Remote Server Call
+
+// - XMLHttpRequest
+
+// let xhr = new XMLHttpRequest();
+
+// xhr.onload = function () {
+//   if (this.status === 200 && this.readyState === 4) {
+//     console.log(this.response);
+//   }
+// };
+
+// xhr.open("GET", "https://jsonplaceholder.typicode.com/users", true);
+
+// xhr.send();
+
+// - Fetch API
+
+fetch("https://jsonplaceholder.typicode.com/users")
+  .then((response) => response.json())
+  .then((result) => console.log(result))
+  .catch(console.error);
