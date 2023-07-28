@@ -169,57 +169,166 @@
 // console.log(set.size);
 
 // CLASSES
-class Person {
-  constructor(name) {
-    this.name = name;
-  }
+// class Person {
+//   constructor(name) {
+//     this.name = name;
+//   }
 
-  getDetails() {
-    return this.name;
-  }
+//   getDetails() {
+//     return this.name;
+//   }
+// }
+
+// class Student extends Person {
+//   // Private Member
+//   #courseEnrolled;
+
+//   // Static
+//   static numberOfStudent = 0;
+
+//   // no-args constructor
+//   // constructor(){}      // NO METHOD OVERLOADING
+
+//   constructor(studId, studName) {
+//     super(studName);
+//     this.studId = studId;
+//     // this.studName = studName;
+//     Student.numberOfStudent++;
+//   }
+
+//   // Accessor & Mutator
+//   get courseEnrolled() {
+//     return this.#courseEnrolled;
+//   }
+//   set courseEnrolled(value) {
+//     this.#courseEnrolled = value;
+//   }
+//   getDetails() {
+//     return (
+//       this.studId +
+//       " : " +
+//       super.getDetails() +
+//       "\n" +
+//       "Course Enrolled : " +
+//       this.courseEnrolled
+//     );
+//   }
+// }
+
+// let monica = new Student("S001", "Monica Geller");
+// monica.courseEnrolled = "React";
+// console.log(monica.getDetails());
+
+// let jenny = new Student("S002", "Jenny Doe");
+// jenny.courseEnrolled = "Node";
+
+// console.log("Total Students Enrolled : " + Student.numberOfStudent);
+
+// DEFAULT PARAMETERS
+// function demo(arr = []) {
+//   if (arr.length > 2) {
+//     console.log("Do something");
+//   } else {
+//     console.log("Do something else");
+//   }
+// }
+
+// demo();
+
+// SHORT-CIRCUIT OPERATOR (&&)
+
+// let arr = [1, 2, 3, 4];
+
+// let result = arr.length > 2 ? " > 2" : " < 2";
+
+// let resultTwo = arr.length < 2 && "Hello";
+
+// let resultThree = 0 && "Hello";
+
+// let resultFour = undefined && "Hello";
+
+// console.log(result);
+// console.log(resultTwo);
+// console.log(resultThree);
+// console.log(resultFour);
+
+// NULLISH COALESCING OPERATOR (??)
+
+// PROMISE API
+// - Promise is the placeholder for future values
+
+// - Pending State
+// - Settled State
+// - SUCCESS / RESOLVED
+// - FAILURE / REJECTED
+
+// function promiseProducer(flag) {
+//   let promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (flag) {
+//         resolve({ message: "SUCCESS" });
+//       } else {
+//         reject(new Error("Something went wrong"));
+//       }
+//     }, 2000);
+//   });
+
+//   return promise;
+// }
+// // Async...await
+// async function promiseConsumer() {
+//   try {
+//     const response = await promiseProducer(false);
+//     const result = JSON.stringify(response);
+//     console.log(result);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+
+// .then().catch()
+// function promiseConsumer() {
+//   promiseProducer(false)
+//     .then((result) => {
+//       console.log("RESULT : ", result);
+//       return JSON.stringify(result);
+//     })
+//     .then((resultTwo) => console.log("RESULT TWO : ", resultTwo))
+//     .catch(console.error);
+// }
+
+// promiseConsumer();
+
+// Promise.resolve("Some Data").then(console.log);
+
+// Promise.reject(new Error("Bad Promise Data"))
+//   .then(console.log)
+//   .catch(console.error);
+
+// const promiseOne = Promise.resolve("Data One");
+// const promiseTwo = Promise.resolve("Data Two");
+// const promiseThree = Promise.resolve("Data Three");
+// const promiseFour = Promise.reject(new Error("Rejected"));
+
+// const promiseArray = [promiseOne, promiseTwo, promiseThree, promiseFour];
+
+// Promise.all(promiseArray).then(console.log).catch(console.error);
+// Promise.allSettled(promiseArray).then(console.log).catch(console.error);
+
+function createPromise(ms, data) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, ms);
+  });
 }
 
-class Student extends Person {
-  // Private Member
-  #courseEnrolled;
+let promiseOne = createPromise(1000, "First Promise");
+let promiseTwo = createPromise(1500, "Second Promise");
+let promiseThree = createPromise(2000, "Third Promise");
+let promiseFour = Promise.reject(new Error("Bad Promise"));
 
-  // Static
-  static numberOfStudent = 0;
+let promiseArray = [promiseOne, promiseTwo, promiseThree, promiseFour];
 
-  // no-args constructor
-  // constructor(){}      // NO METHOD OVERLOADING
-
-  constructor(studId, studName) {
-    super(studName);
-    this.studId = studId;
-    // this.studName = studName;
-    Student.numberOfStudent++;
-  }
-
-  // Accessor & Mutator
-  get courseEnrolled() {
-    return this.#courseEnrolled;
-  }
-  set courseEnrolled(value) {
-    this.#courseEnrolled = value;
-  }
-  getDetails() {
-    return (
-      this.studId +
-      " : " +
-      super.getDetails() +
-      "\n" +
-      "Course Enrolled : " +
-      this.courseEnrolled
-    );
-  }
-}
-
-let monica = new Student("S001", "Monica Geller");
-monica.courseEnrolled = "React";
-console.log(monica.getDetails());
-
-let jenny = new Student("S002", "Jenny Doe");
-jenny.courseEnrolled = "Node";
-
-console.log("Total Students Enrolled : " + Student.numberOfStudent);
+Promise.race(promiseArray).then(console.log).catch(console.error);
+// Promise.any(promiseArray).then(console.log).catch(console.error);
