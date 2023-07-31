@@ -1,9 +1,5 @@
 import React from "react";
-
-interface ITodo {
-  id: string;
-  label: string;
-}
+import { ITodo } from "../../../model/todo";
 
 interface IProps {
   todo: ITodo;
