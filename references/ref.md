@@ -24,3 +24,11 @@
    > cleanup will fire
    > cb will fire
    > cleanup will also fire just before the component is destroyed
+
+# to include redux with react app
+
+- npm install @reduxjs/toolkit react-redux
+
+# to create SPA
+
+- npm install react-router-dom
