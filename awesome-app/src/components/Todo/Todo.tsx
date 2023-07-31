@@ -23,10 +23,10 @@ function Todo() {
   return (
     <div className="container">
       <div className="row">
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
-        <TodoItem />
+        <TodoItem todo={todoCollection[0]} />
+        <TodoItem todo={todoCollection[1]} />
+        <TodoItem todo={todoCollection[2]} />
+        <TodoItem todo={todoCollection[3]} />
       </div>
     </div>
   );
