@@ -1,5 +1,10 @@
 import { useDispatch } from "react-redux";
-import { increment, decrement } from "../../store/counter.slice";
+import {
+  increment,
+  decrement,
+  addCounter,
+  subtractCounter,
+} from "../../store/counter.slice";
 
 export default function CounterAction() {
   const dispatch = useDispatch();
@@ -11,6 +16,18 @@ export default function CounterAction() {
       </button>
       <button className="btn btn-warning" onClick={() => dispatch(decrement())}>
         Decrease
+      </button>
+      <button
+        className="btn btn-success"
+        onClick={() => dispatch(addCounter(10))}
+      >
+        ADD 10
+      </button>
+      <button
+        className="btn btn-secondary"
+        onClick={() => dispatch(subtractCounter(5))}
+      >
+        Subtract 5
       </button>
     </div>
   );
