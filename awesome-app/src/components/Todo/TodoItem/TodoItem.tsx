@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ITodo } from "../../../model/todo";
 import classes from "./TodoItem.module.css";
+import AuthContext from "../../../context/auth-context";
 
 interface IProps {
   todo: ITodo;
