@@ -2,58 +2,68 @@ import { act, render, screen } from "@testing-library/react";
 import Output from "./Output";
 import userEvent from "@testing-library/user-event";
 
-test("renders heading element with text 'the test component'", () => {
-  render(<Output />);
+describe("<Output /> Component", () => {
+  test("renders heading element with text 'the test component'", () => {
+    render(<Output />);
 
-  const headingElement = screen.getByText(/the test component/i);
+    const headingElement = screen.getByText(/the test component/i);
 
-  expect(headingElement).toBeInTheDocument();
-});
-
-test("renders 'toggle is false' when the button is NOT clicked", () => {
-  render(<Output />);
-
-  //   const pElement = screen.getByText(/toggle is false/, { exact: false });
-
-  //   expect(pElement).toBeInTheDocument();
-
-  const pElement = screen.queryByText(/toggle is false/, { exact: true });
-
-  expect(pElement).not.toBeNull();
-});
-
-test("does NOT renders 'toggle is true' when the button is NOT clicked", () => {
-  render(<Output />);
-
-  const pElement = screen.queryByText(/toggle is true/, { exact: false });
-
-  expect(pElement).toBeNull();
-});
-
-test("renders 'toggle is true' when the button is clcked", async () => {
-  render(<Output />);
-
-  const btnElement = screen.getByRole("button");
-
-  act(() => {
-    userEvent.click(btnElement);
+    expect(headingElement).toBeInTheDocument();
   });
 
-  const pElement = await screen.findByText(/toggle is true/);
+  test("renders 'toggle is false' when the button is NOT clicked", () => {
+    render(<Output />);
 
-  expect(pElement).not.toBeNull();
-});
+    //   const pElement = screen.getByText(/toggle is false/, { exact: false });
 
-test("does not render 'toggle is false' when the button is clicked", () => {
-  render(<Output />);
+    //   expect(pElement).toBeInTheDocument();
 
-  const btnElement = screen.getByRole("button");
+    const pElement = screen.queryByText(/toggle is false/, { exact: true });
 
-  act(() => {
-    userEvent.click(btnElement);
+    expect(pElement).not.toBeNull();
   });
 
-  const pElement = screen.queryByText(/toggle is false/, { exact: false });
+  test("does NOT renders 'toggle is true' when the button is NOT clicked", () => {
+    render(<Output />);
 
-  expect(pElement).not.toBeInTheDocument();
+    const pElement = screen.queryByText(/toggle is true/, { exact: false });
+
+    expect(pElement).toBeNull();
+  });
+
+  test("renders 'toggle is true' when the button is clcked", async () => {
+    render(<Output />);
+
+    const btnElement = screen.getByRole("button");
+
+    act(() => {
+      userEvent.click(btnElement);
+    });
+
+    const pElement = await screen.findByText(/toggle is true/);
+
+    expect(pElement).not.toBeNull();
+  });
+
+  test("does not render 'toggle is false' when the button is clicked", () => {
+    render(<Output />);
+
+    const btnElement = screen.getByRole("button");
+
+    act(() => {
+      userEvent.click(btnElement);
+    });
+
+    const pElement = screen.queryByText(/toggle is false/, { exact: false });
+
+    expect(pElement).not.toBeInTheDocument();
+  });
+
+  test("render the list of users names", async () => {
+    render(<Output />);
+
+    const listItems = await screen.findAllByRole("listitem");
+
+    expect(listItems).not.toHaveLength(0);
+  });
 });
