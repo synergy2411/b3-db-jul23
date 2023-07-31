@@ -1,0 +1,7 @@
+.my-card {
+  transition: all 0.2s ease;
+}
+.my-card:hover {
+  cursor: pointer;
+  background-color: lightgrey;
+}

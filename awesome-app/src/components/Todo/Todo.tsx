@@ -27,8 +27,15 @@ function Todo() {
   const [todoCollection, setTodoCollection] = useState<ITodo[]>(INITIAL_TODOS);
 
   const addNewTodo = (todo: ITodo) => {
+    // todoCollection.push(todo)                   // NEVER DO THIS // STATE IS CONSIDERED AS IMMUTABLE
+    // setTodoCollection(todoCollection);
     setTodoCollection((prevTodos) => [todo, ...prevTodos]);
     setToggle(false);
+  };
+
+  const deleteTodo = (todoId: string) => {
+    const filteredTodos = todoCollection.filter((todo) => todo.id !== todoId);
+    setTodoCollection(filteredTodos);
   };
   return (
     <div className="container">
@@ -45,7 +52,7 @@ function Todo() {
 
       <div className="row">
         {todoCollection.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
+          <TodoItem deleteTodo={deleteTodo} key={todo.id} todo={todo} />
         ))}
       </div>
     </div>

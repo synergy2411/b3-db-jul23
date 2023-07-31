@@ -7,11 +7,23 @@ interface IProps {
 
 const AddTodo: React.FC<IProps> = (props) => {
   const [enteredLabel, setEnteredLabel] = useState<string>("");
+  const [isError, setIsError] = useState(false);
+
+  const labelChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEnteredLabel(e.target.value);
+  };
 
   const submitClickHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    if (enteredLabel.trim() === "") {
+      setIsError(true);
+      return;
+    } else if (enteredLabel.length < 6) {
+      setIsError(true);
+      return;
+    }
     let newTodo: ITodo = {
       id: Math.round(Math.random() * 1000).toString(),
       label: enteredLabel,
@@ -32,7 +44,7 @@ const AddTodo: React.FC<IProps> = (props) => {
                     type="text"
                     className="form-control"
                     value={enteredLabel}
-                    onChange={(e) => setEnteredLabel(e.target.value)}
+                    onChange={labelChangeHandler}
                   />
                 </div>
                 <div className="col-4">
@@ -47,6 +59,7 @@ const AddTodo: React.FC<IProps> = (props) => {
                   </div>
                 </div>
               </div>
+              {isError && <p className="alert alert-danger">Some went wrong</p>}
             </form>
           </div>
         </div>
