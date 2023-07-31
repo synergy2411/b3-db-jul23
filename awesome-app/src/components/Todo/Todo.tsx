@@ -1,6 +1,10 @@
+import { useState } from "react";
+
 import TodoItem from "./TodoItem/TodoItem";
 
 function Todo() {
+  let [toggle, setToggle] = useState<boolean>(false);
+
   let todoCollection = [
     {
       id: "t001",
@@ -23,10 +27,20 @@ function Todo() {
   return (
     <div className="container">
       <div className="row">
-        <TodoItem todo={todoCollection[0]} />
-        <TodoItem todo={todoCollection[1]} />
-        <TodoItem todo={todoCollection[2]} />
-        <TodoItem todo={todoCollection[3]} />
+        <div className="col-4 offset-4">
+          <div className="d-grid">
+            <button className="btn btn-dark" onClick={() => setToggle(!toggle)}>
+              {toggle ? "Hide" : "Show"}
+            </button>
+          </div>
+        </div>
+      </div>
+      {toggle && <p>Some cool content</p>}
+
+      <div className="row">
+        {todoCollection.map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
       </div>
     </div>
   );
