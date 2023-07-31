@@ -5,6 +5,7 @@ import UserRef from "./components/Demo/UserRef";
 import UseEffect from "./components/Demo/UseEffect";
 import AuthContext from "./context/auth-context";
 import UseContext from "./components/Demo/UseContext";
+import Counter from "./components/Counter/Counter";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,13 +14,15 @@ function App() {
     <div>
       <h1>My Awesome App</h1>
       <hr />
+      <Counter />
       {/* <UseEffect /> */}
       {/* <UserRef /> */}
       {/* <ClassBased /> */}
-      <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-        <Todo />
+      {/* <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}> */}
+      {/* <Todo />
         <UseContext />
-      </AuthContext.Provider>
+         */}
+      {/* </AuthContext.Provider> */}
     </div>
   );
 }
